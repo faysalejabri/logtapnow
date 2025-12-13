@@ -1019,17 +1019,17 @@ const App = () => {
         <Route
           path="/dashboard"
           element={
-            // <ProtectedRoute>
-            <Dashboard />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/edit/:id"
           element={
-            // <ProtectedRoute>
-            <Editor />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <Editor />
+            </ProtectedRoute>
           }
         />
 

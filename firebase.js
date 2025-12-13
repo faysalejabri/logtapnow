@@ -9,11 +9,12 @@ const firebaseConfig = {
   storageBucket: "tapcard-app-469e2.firebasestorage.app",
   messagingSenderId: "734225254092",
   appId: "1:734225254092:web:abe7e19ea56df4c47de469",
-  measurementId: "G-KSW3VDB5JD"
+  measurementId: "G-KSW3VDB5JD",
 };
 
 // Initialize Firebase (Modular SDK style)
 // This check prevents errors if the app is initialized more than once
+
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 // Initialize Authentication
