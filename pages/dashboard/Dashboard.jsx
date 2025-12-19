@@ -1,7 +1,8 @@
-import { AUTH_KEY, getSession, getStoredProfiles, saveProfiles } from "@/App";
+import { AUTH_KEY, saveProfiles } from "@/App";
 import { AppleBackground } from "@/components/AppleBackground";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { DEFAULT_PROFILE, PROFILES } from "@/data/data";
 import { signOut } from "firebase/auth";
 import {
   CreditCard,
@@ -13,37 +14,22 @@ import {
   Users,
   Copy,
   RefreshCw,
+  Key,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import styles from "./Dashboard.module.scss";
 
-// --- Dashboard Component ---
 const Dashboard = () => {
   const { t, isRTL } = useLanguage();
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState(PROFILES);
   const [session, setSession] = useState(null);
   const [selectedCredentialProfile, setSelectedCredentialProfile] =
     useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const currentSession = getSession();
-    if (!currentSession) {
-      navigate("/");
-      return;
-    }
-    setSession(currentSession);
-
-    const allProfiles = getStoredProfiles();
-
-    // If client, redirect immediately to their editor
-    if (currentSession.role === "client" && currentSession.id) {
-      navigate(`/edit/${currentSession.id}`);
-      return;
-    }
-
-    setProfiles(allProfiles);
-  }, [navigate]);
+  const activeProfiles = profiles.filter((p) => p.active);
+  const inactiveProfiles = profiles.filter((p) => !p.active);
 
   const handleLogout = async () => {
     const role = session?.role;
@@ -69,9 +55,7 @@ const Dashboard = () => {
       slug: id,
     };
     const updated = [...profiles, newProfile];
-    if (saveProfiles(updated)) {
-      setProfiles(updated);
-    }
+    setProfiles(updated);
   };
 
   const deleteProfile = (e, id) => {
@@ -112,32 +96,34 @@ const Dashboard = () => {
     navigator.clipboard.writeText(text);
   };
 
-  // if (session?.role === "client") return null;
-
   return (
     <AppleBackground>
-      <div dir={isRTL ? "rtl" : "ltr"}>
+      <div className={styles.wrapper} dir={isRTL ? "rtl" : "ltr"}>
         {/* Navigation */}
-        <nav className="bg-white/70 backdrop-blur-xl border-b border-white/50 px-8 py-4 flex justify-between items-center sticky top-0 z-50">
-          <div className="flex items-center gap-2 text-2xl font-bold tracking-tight text-gray-900">
-            <div className="bg-blue-600 text-white p-1.5 rounded-lg">
-              <CreditCard size={20} fill="currentColor" />
+        <nav className={styles.navbar}>
+          <div className={styles.navbar__brand}>
+            <div className={styles.navbar__logo}>
+              <CreditCard size={20} />
             </div>
             Tapcard
           </div>
-          <div className="flex items-center gap-4">
+
+          <div className={styles.navbar__actions}>
             <LanguageSwitcher />
+
             <button
+              className={`${styles.btn} ${styles.__primary}`}
               onClick={createNewProfile}
-              className="bg-gray-900 hover:bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
             >
-              <Plus size={18} /> {t("newCardBtn")}
+              <Plus size={18} />
+              {t("newCardBtn")}
             </button>
+
             <button
+              className={`${styles.btn} ${styles.__icon}`}
               onClick={handleLogout}
-              className="p-2.5 bg-gray-100 hover:bg-red-50 text-gray-600 hover:text-red-600 rounded-full transition-colors"
             >
-              <LogOut size={20} className={isRTL ? "rotate-180" : ""} />
+              <LogOut size={20} className={isRTL ? "rtl" : ""} />
             </button>
           </div>
         </nav>
@@ -171,7 +157,16 @@ const Dashboard = () => {
                 </span>
                 <LayoutGrid size={20} className="text-white/80" />
               </div>
-              <h3 className="text-4xl font-bold">{profiles.length}</h3>
+              <h3 className="text-4xl font-bold">{activeProfiles.length}</h3>
+            </div>
+            <div className="bg-white/60 backdrop-blur-md rounded-[2rem] p-8 border border-white/50 shadow-sm flex flex-col justify-between h-40">
+              <div className="flex justify-between items-start">
+                <span className="text-gray-500 font-semibold">
+                  {t("inactiveProfiles")}
+                </span>
+                <LayoutGrid size={20} className="text-white/80" />
+              </div>
+              <h3 className="text-4xl font-bold">{inactiveProfiles.length}</h3>
             </div>
           </div>
 
@@ -203,7 +198,9 @@ const Dashboard = () => {
                 <div
                   key={profile.id}
                   className="bg-white/80 backdrop-blur-md rounded-[2rem] border border-white/60 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden"
-                  onClick={() => navigate(`/edit/${profile.id}`)}
+                  onClick={() =>
+                    navigate(`/edit/${profile.id}`, { state: profile })
+                  }
                 >
                   <div
                     className="h-28 w-full relative"

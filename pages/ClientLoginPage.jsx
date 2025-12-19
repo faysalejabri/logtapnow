@@ -35,15 +35,15 @@ const ClientLoginPage = () => {
     //   (p) => p.id === username.trim() && p.password === password.trim()
     // );
 
-    const client = { id: username.trim(), password: password.trim() };
+    // const client = { id: username.trim(), password: password.trim() };
 
-    if (client) {
-      const session = { role: "client", id: client.id };
-      localStorage.setItem(AUTH_KEY, JSON.stringify(session));
-      navigate("/dashboard");
-    } else {
-      setError(t("errorClient"));
-    }
+    // if (client) {
+    //   const session = { role: "client", id: client.id };
+    //   localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+    navigate("/dashboard");
+    // } else {
+    //   setError(t("errorClient"));
+    // }
   };
 
   const handleForgotPassword = async (e) => {
@@ -55,8 +55,8 @@ const ClientLoginPage = () => {
     setResetMessage("");
 
     try {
-      // Use modular method
-      await sendPasswordResetEmail(auth, resetEmail);
+      //   // Use modular method
+      //   await sendPasswordResetEmail(auth, resetEmail);
       setResetMessage("Check your inbox! We've sent a password reset link.");
       setResetEmail("");
     } catch (err) {

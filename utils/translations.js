@@ -23,6 +23,7 @@ export const translations = {
     dashboardTitle: "Admin Dashboard",
     totalClients: "Total Clients",
     activeProfiles: "Active Profiles",
+    inactiveProfiles: "Inactive Profiles",
     clientCards: "Client Cards",
     noCards: "No cards yet",
     noCardsDesc: "Create your first digital business card for a client.",
@@ -123,6 +124,7 @@ export const translations = {
     dashboardTitle: "Tableau de bord Admin",
     totalClients: "Total Clients",
     activeProfiles: "Profils Actifs",
+    inactiveProfiles: "Profils Inactifs",
     clientCards: "Cartes Clients",
     noCards: "Aucune carte",
     noCardsDesc:
@@ -213,6 +215,7 @@ export const translations = {
     dashboardTitle: "لوحة تحكم المسؤول",
     totalClients: "إجمالي العملاء",
     activeProfiles: "الملفات النشطة",
+    inactiveProfiles: "الملفات غير نشطة",
     clientCards: "بطاقات العملاء",
     noCards: "لا توجد بطاقات بعد",
     noCardsDesc: "أنشئ أول بطاقة عمل رقمية لعميل.",
