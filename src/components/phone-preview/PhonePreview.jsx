@@ -123,24 +123,21 @@ const PhonePreview = ({ profile }) => {
           {/* Social Icons */}
           {profile?.socials.length > 0 && (
             <div className={styles["phone-preview__socials"]}>
-              {profile.socials.map((social) => {
-                const Icon = SOCIAL_ICONS[social.platform] || Globe;
-                return (
-                  <a
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles["phone-preview__social-link"]}
-                    style={iconButtonStyle}
-                  >
-                    <i
-                      className={`fi fi-brands-${social.platform}`}
-                      style={{ fontSize: 20 }}
-                    />
-                  </a>
-                );
-              })}
+              {profile.socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles["phone-preview__social-link"]}
+                  style={iconButtonStyle}
+                >
+                  <i
+                    className={`fi fi-brands-${social.platform}`}
+                    style={{ fontSize: 20 }}
+                  />
+                </a>
+              ))}
             </div>
           )}
 
