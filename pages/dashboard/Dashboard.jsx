@@ -130,43 +130,44 @@ const Dashboard = () => {
 
         <main className="max-w-7xl mx-auto px-8 py-12">
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/60 backdrop-blur-md rounded-[2rem] p-8 border border-white/50 shadow-sm flex flex-col justify-between h-40">
-              <div className="flex justify-between items-start">
-                <span className="text-gray-500 font-semibold">
-                  {t("dashboardTitle")}
-                </span>
-                <div className="p-2 bg-blue-100/50 text-blue-600 rounded-xl">
+          <div className={styles.grid}>
+            {/* Total Clients */}
+            <div className={`${styles.cardBase} ${styles.glassCard}`}>
+              <div className={styles.cardHeader}>
+                <span className={styles.cardLabel}>{t("dashboardTitle")}</span>
+                <div className={styles.iconWrapper}>
                   <Users size={20} />
                 </div>
               </div>
+
               <div>
-                <h3 className="text-4xl font-bold text-gray-900">
-                  {profiles.length}
-                </h3>
-                <p className="text-sm text-gray-400 mt-1">
-                  {t("totalClients")}
-                </p>
+                <h3 className={styles.value}>{profiles.length}</h3>
+                <p className={styles.subText}>{t("totalClients")}</p>
               </div>
             </div>
-            {/* Decorative Widgets */}
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2rem] p-8 shadow-lg text-white flex flex-col justify-between h-40">
-              <div className="flex justify-between items-start">
-                <span className="text-white/80 font-semibold">
+
+            {/* Active Profiles */}
+            <div className={`${styles.cardBase} ${styles.gradientCard}`}>
+              <div className={styles.cardHeader}>
+                <span className={styles.cardLabelLight}>
                   {t("activeProfiles")}
                 </span>
-                <LayoutGrid size={20} className="text-white/80" />
+                <LayoutGrid size={20} className={styles.iconLight} />
               </div>
-              <h3 className="text-4xl font-bold">{activeProfiles.length}</h3>
+
+              <h3 className={styles.valueLight}>{activeProfiles.length}</h3>
             </div>
-            <div className="bg-white/60 backdrop-blur-md rounded-[2rem] p-8 border border-white/50 shadow-sm flex flex-col justify-between h-40">
-              <div className="flex justify-between items-start">
-                <span className="text-gray-500 font-semibold">
+
+            {/* Inactive Profiles */}
+            <div className={`${styles.cardBase} ${styles.glassCard}`}>
+              <div className={styles.cardHeader}>
+                <span className={styles.cardLabel}>
                   {t("inactiveProfiles")}
                 </span>
-                <LayoutGrid size={20} className="text-white/80" />
+                <LayoutGrid size={20} className={styles.iconLight} />
               </div>
-              <h3 className="text-4xl font-bold">{inactiveProfiles.length}</h3>
+
+              <h3 className={styles.value}>{inactiveProfiles.length}</h3>
             </div>
           </div>
 
@@ -175,40 +176,36 @@ const Dashboard = () => {
           </h2>
 
           {profiles.length === 0 ? (
-            <div className="text-center py-24 bg-white/40 backdrop-blur-sm rounded-[2.5rem] border border-dashed border-gray-300/50">
-              <div className="w-20 h-20 bg-white shadow-lg rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 text-gray-400">
+            <div className={styles.emptyState}>
+              <div className={styles.emptyIcon}>
                 <CreditCard size={36} />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                {t("noCards")}
-              </h3>
-              <p className="text-gray-500 mb-8 max-w-sm mx-auto">
-                {t("noCardsDesc")}
-              </p>
-              <button
-                onClick={createNewProfile}
-                className="text-blue-600 font-semibold hover:underline"
-              >
+
+              <h3 className={styles.emptyTitle}>{t("noCards")}</h3>
+
+              <p className={styles.emptyText}>{t("noCardsDesc")}</p>
+
+              <button onClick={createNewProfile} className={styles.emptyButton}>
                 {t("createBtn")}
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className={styles.grid2}>
               {profiles.map((profile) => (
                 <div
                   key={profile.id}
-                  className="bg-white/80 backdrop-blur-md rounded-[2rem] border border-white/60 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden"
+                  className={styles.card}
                   onClick={() =>
                     navigate(`/edit/${profile.id}`, { state: profile })
                   }
                 >
                   <div
-                    className="h-28 w-full relative"
+                    className={styles.cardHeader}
                     style={{ backgroundColor: profile.theme.primaryColor }}
                   >
-                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className={styles.cardActions}>
                       <button
-                        className="p-2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white rounded-full transition-colors"
+                        className={styles.actionButton}
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(`/view/${profile.id}`);
@@ -216,8 +213,9 @@ const Dashboard = () => {
                       >
                         <Eye size={16} />
                       </button>
+
                       <button
-                        className="p-2 bg-white/20 backdrop-blur-md hover:bg-red-500/80 text-white rounded-full transition-colors"
+                        className={`${styles.actionButton} ${styles.actionButtonDanger}`}
                         onClick={(e) => deleteProfile(e, profile.id)}
                       >
                         <X size={16} />
@@ -225,39 +223,29 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <div className="px-6 pb-6 relative">
-                    <div className="w-20 h-20 rounded-[1.2rem] border-4 border-white bg-gray-100 overflow-hidden shadow-md -mt-10 mb-4 mx-auto">
+                  <div className={styles.cardBody}>
+                    <div className={styles.avatar}>
                       {profile.profilePicture ? (
-                        <img
-                          src={profile.profilePicture}
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={profile.profilePicture} alt="" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400">
-                          <CreditCard size={24} />
-                        </div>
+                        <CreditCard size={24} />
                       )}
                     </div>
 
-                    <div className="text-center mb-6">
-                      <h3 className="font-bold text-gray-900 truncate text-lg">
-                        {profile.firstName || t("newProfileName")}{" "}
-                        {profile.lastName || ""}
-                      </h3>
-                      <p className="text-sm text-gray-500 truncate font-medium">
-                        {profile.profession || t("profession")}
-                      </p>
-                    </div>
+                    <h3 className={styles.name}>
+                      {profile.firstName || t("newProfileName")}{" "}
+                      {profile.lastName || ""}
+                    </h3>
+
+                    <p className={styles.profession}>
+                      {profile.profession || t("profession")}
+                    </p>
 
                     <button
-                      className="w-full py-3 px-4 bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-700 font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 group/btn"
+                      className={styles.accessButton}
                       onClick={(e) => showCredentials(e, profile)}
                     >
-                      <Key
-                        size={16}
-                        className="text-gray-400 group-hover/btn:text-blue-600 transition-colors"
-                      />
+                      <Key size={16} className={styles.accessIcon} />
                       <span className="text-sm">Access ID</span>
                     </button>
                   </div>
@@ -269,79 +257,86 @@ const Dashboard = () => {
 
         {/* Credentials Modal (Glass) */}
         {selectedCredentialProfile && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/30 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <GlassCard className="w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
-              <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white/50">
-                <h3 className="font-bold text-xl text-gray-900 flex items-center gap-2">
-                  <Lock size={20} className="text-blue-600" /> {t("credTitle")}
+          <div className={styles.credentialOverlay}>
+            <GlassCard className={styles.credentialModal}>
+              {/* Header */}
+              <div className={styles.credentialHeader}>
+                <h3 className={styles.credentialTitle}>
+                  <Lock size={20} className={styles.credentialTitleIcon} />
+                  {t("credTitle")}
                 </h3>
+
                 <button
                   onClick={() => setSelectedCredentialProfile(null)}
-                  className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+                  className={styles.credentialClose}
                 >
                   <X size={18} />
                 </button>
               </div>
 
-              <div className="p-8 space-y-6">
-                <p className="text-gray-500 text-sm font-medium leading-relaxed">
-                  {t("credDesc")}
-                </p>
+              {/* Body */}
+              <div className={styles.credentialBody}>
+                <p className={styles.credentialDescription}>{t("credDesc")}</p>
 
-                <div className="space-y-4">
-                  <div className="group">
-                    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">
-                      {t("loginId")}
-                    </label>
-                    <div className="flex gap-2 mt-1.5">
-                      <div className="flex-1 bg-gray-50 border-0 px-4 py-3 rounded-2xl text-gray-800 font-mono text-base font-medium flex items-center">
-                        {selectedCredentialProfile.id}
-                      </div>
-                      <button
-                        onClick={() =>
-                          copyToClipboard(selectedCredentialProfile.id)
-                        }
-                        className="px-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-600 transition-colors"
-                      >
-                        <Copy size={20} />
-                      </button>
+                {/* Login ID */}
+                <div className={styles.credentialBlock}>
+                  <label className={styles.credentialLabel}>
+                    {t("loginId")}
+                  </label>
+
+                  <div className={styles.credentialRow}>
+                    <div className={styles.credentialValue}>
+                      {selectedCredentialProfile.id}
                     </div>
-                  </div>
-                  <div className="group">
-                    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">
-                      {t("password")}
-                    </label>
-                    <div className="flex gap-2 mt-1.5">
-                      <div className="flex-1 bg-gray-50 border-0 px-4 py-3 rounded-2xl text-gray-800 font-mono text-base font-medium flex items-center">
-                        {selectedCredentialProfile.password}
-                      </div>
-                      <button
-                        onClick={() =>
-                          regenerateProfilePassword(
-                            selectedCredentialProfile.id
-                          )
-                        }
-                        className="px-4 bg-blue-50 hover:bg-blue-100 rounded-2xl text-blue-600 transition-colors"
-                      >
-                        <RefreshCw size={20} />
-                      </button>
-                      <button
-                        onClick={() =>
-                          copyToClipboard(
-                            selectedCredentialProfile.password || ""
-                          )
-                        }
-                        className="px-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-600 transition-colors"
-                      >
-                        <Copy size={20} />
-                      </button>
-                    </div>
+
+                    <button
+                      onClick={() =>
+                        copyToClipboard(selectedCredentialProfile.id)
+                      }
+                      className={`${styles.credentialIconButton} ${styles.credentialGrayButton}`}
+                    >
+                      <Copy size={20} />
+                    </button>
                   </div>
                 </div>
 
+                {/* Password */}
+                <div className={styles.credentialBlock}>
+                  <label className={styles.credentialLabel}>
+                    {t("password")}
+                  </label>
+
+                  <div className={styles.credentialRow}>
+                    <div className={styles.credentialValue}>
+                      {selectedCredentialProfile.password}
+                    </div>
+
+                    <button
+                      onClick={() =>
+                        regenerateProfilePassword(selectedCredentialProfile.id)
+                      }
+                      className={`${styles.credentialIconButton} ${styles.credentialBlueButton}`}
+                    >
+                      <RefreshCw size={20} />
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        copyToClipboard(
+                          selectedCredentialProfile.password || ""
+                        )
+                      }
+                      className={`${styles.credentialIconButton} ${styles.credentialGrayButton}`}
+                    >
+                      <Copy size={20} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Done */}
                 <button
                   onClick={() => setSelectedCredentialProfile(null)}
-                  className="w-full py-4 bg-gray-900 hover:bg-black text-white font-bold rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  className={styles.credentialDone}
                 >
                   {t("doneBtn")}
                 </button>
