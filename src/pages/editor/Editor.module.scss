@@ -1,12 +1,9 @@
-/* ProfilePage.module.scss */
-
 .container {
   min-height: 100vh;
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: sans-serif;
   background-color: #f5f5f7;
 }
 
@@ -76,13 +73,6 @@
 
 .liveViewLink:hover {
   background-color: #dbeafe;
-}
-
-.previewButton {
-  padding: 0.625rem;
-  color: #2563eb;
-  background-color: #eff6ff;
-  border-radius: 9999px;
 }
 
 .logoutButton {

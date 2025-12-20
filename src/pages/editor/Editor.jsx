@@ -60,7 +60,7 @@ const Editor = () => {
             <Eye size={18} /> {t("liveView")}
           </Link>
           <button
-            className={styles.previewButton}
+            className={styles.liveViewLink}
             onClick={() => setShowPreviewMobile(!showPreviewMobile)}
           >
             {showPreviewMobile ? t("edit") : t("preview")}

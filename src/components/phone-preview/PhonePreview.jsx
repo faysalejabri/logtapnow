@@ -85,6 +85,7 @@ const PhonePreview = ({ profile }) => {
             <div className={styles["phone-preview__card-text"]}>
               <h2 className={styles["phone-preview__card-title"]}>
                 <span>{profile.firstName || "First"}</span>
+                <br />
                 <span className={styles["phone-preview__card-title-last"]}>
                   {profile.lastName || "Name"}
                 </span>
@@ -133,7 +134,10 @@ const PhonePreview = ({ profile }) => {
                     className={styles["phone-preview__social-link"]}
                     style={iconButtonStyle}
                   >
-                    <Icon size={20} />
+                    <i
+                      className={`fi fi-brands-${social.platform}`}
+                      style={{ fontSize: 20 }}
+                    />
                   </a>
                 );
               })}
