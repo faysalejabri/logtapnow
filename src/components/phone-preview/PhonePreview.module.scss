@@ -1,0 +1,322 @@
+.phone-preview {
+  position: relative;
+  margin: 0 auto;
+  background: #111827;
+  border: 14px solid #111827;
+  border-radius: 2.5rem;
+  height: 750px;
+  width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.phone-preview__notch {
+  height: 32px;
+  width: 100%;
+  background: #111827;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+}
+.phone-preview__notch-inner {
+  height: 18px;
+  width: 120px;
+  background: #000;
+  border-radius: 0 0 1rem 1rem;
+}
+.phone-preview__screen {
+  flex: 1;
+  background: #f3f4f6;
+  overflow-y: auto;
+  position: relative;
+}
+.phone-preview__share-btn {
+  position: absolute;
+  top: 3rem;
+  right: 1.25rem;
+  z-index: 30;
+  padding: 0.625rem;
+  background: #fff;
+  border-radius: 9999px;
+  color: #4b5563;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: color 0.2s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: #2563eb;
+    transform: scale(1.1);
+  }
+}
+.phone-preview__main {
+  padding: 3.5rem 1rem 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+.phone-preview__logo {
+  margin-bottom: 1.5rem;
+  opacity: 0.3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.phone-preview__card {
+  width: 100%;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 12rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s;
+}
+.phone-preview__card-img {
+  width: 45%;
+  position: relative;
+  background: #e5e7eb;
+  height: 100%;
+}
+.phone-preview__card-img-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.phone-preview__card-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  background: #e5e7eb;
+}
+.phone-preview__card-text {
+  width: 55%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  background: #fff;
+  position: relative;
+}
+.phone-preview__card-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.phone-preview__card-title-last {
+  color: #6b7280;
+}
+.phone-preview__card-divider {
+  height: 0.25rem;
+  width: 2rem;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+}
+.phone-preview__card-profession {
+  font-size: 0.625rem;
+  font-weight: bold;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+  max-height: 2.5em;
+  overflow: hidden;
+}
+.phone-preview__save-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.phone-preview__save-btn:hover {
+  opacity: 0.9;
+}
+.phone-preview__save-btn:active {
+  transform: scale(0.97);
+}
+.phone-preview__bio {
+  margin-top: 1.5rem;
+  width: 100%;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f3f4f6;
+}
+.phone-preview__bio-title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+.phone-preview__bio-text {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.phone-preview__socials {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+.phone-preview__social-link {
+  padding: 0.75rem;
+  background: #fff;
+  color: #374151;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f3f4f6;
+  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone-preview__social-link:hover {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+  transform: translateY(-4px);
+}
+.phone-preview__contacts {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.phone-preview__contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f3f4f6;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.phone-preview__contact-link:hover {
+  background: #f3f4f6;
+}
+.phone-preview__contact-icon {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone-preview__contact-icon--email {
+  background: #dbeafe;
+  color: #2563eb;
+}
+.phone-preview__contact-icon--phone {
+  background: #dcfce7;
+  color: #22c55e;
+}
+.phone-preview__contact-text {
+  font-size: 0.95rem;
+  color: #374151;
+  font-weight: 500;
+  word-break: break-all;
+}
+.phone-preview__youtube {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+.phone-preview__youtube-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+.phone-preview__youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.phone-preview__map {
+  margin-top: 1.5rem;
+  width: 100%;
+  background: #fff;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f3f4f6;
+}
+.phone-preview__map-inner {
+  width: 100%;
+  height: 10rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #e5e7eb;
+  position: relative;
+}
+.phone-preview__map-iframe {
+  opacity: 0.9;
+  transition: opacity 0.2s;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.phone-preview__map-iframe:hover {
+  opacity: 1;
+}
+.phone-preview__map-desc {
+  padding: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.phone-preview__map-text {
+  font-size: 0.75rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+.phone-preview__footer {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.625rem;
+  color: #9ca3af;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+}

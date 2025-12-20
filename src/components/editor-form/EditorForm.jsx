@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { SOCIAL_LABELS } from "../../constants";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   Trash2,
   Plus,
@@ -16,7 +15,8 @@ import {
   AlertTriangle,
   Video as VideoIcon,
 } from "lucide-react";
-import Button from "./Button";
+import Button from "../button/Button";
+import { SOCIAL_LABELS } from "@/constants";
 
 const EditorForm = ({ profile, onChange }) => {
   const { t, isRTL } = useLanguage();

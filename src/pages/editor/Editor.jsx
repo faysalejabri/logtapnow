@@ -1,7 +1,7 @@
 import { AUTH_KEY } from "@/App";
-import EditorForm from "@/src/components/EditorForm";
-import LanguageSwitcher from "@/src/components/LanguageSwitcher";
-import PhonePreview from "@/src/components/PhonePreview";
+import EditorForm from "@/src/components/editor-form/EditorForm";
+import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
+import PhonePreview from "@/src/components/phone-preview/PhonePreview";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { session } from "@/src/data/data";
 import { signOut } from "firebase/auth";

@@ -1,4 +1,4 @@
-import PhonePreview from "@/src/components/PhonePreview";
+import PhonePreview from "@/src/components/phone-preview/PhonePreview";
 import { PROFILES } from "@/src/data/data";
 import { useMemo } from "react";
 import { useParams } from "react-router";
