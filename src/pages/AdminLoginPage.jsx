@@ -1,9 +1,9 @@
 import { AUTH_KEY, AUTHORIZED_ADMINS } from "@/App";
-import { AppleBackground } from "@/components/AppleBackground";
-import { AppleInput } from "@/components/AppleInput";
-import { GlassCard } from "@/components/GlassCard";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { AppleBackground } from "@/src/components/AppleBackground";
+import { AppleInput } from "@/src/components/AppleInput";
+import { GlassCard } from "@/src/components/GlassCard";
+import LanguageSwitcher from "@/src/components/LanguageSwitcher";
+import { useLanguage } from "@/src/contexts/LanguageContext";
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,

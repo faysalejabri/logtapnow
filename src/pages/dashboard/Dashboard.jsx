@@ -1,8 +1,8 @@
 import { AUTH_KEY, saveProfiles } from "@/App";
-import { AppleBackground } from "@/components/AppleBackground";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { DEFAULT_PROFILE, PROFILES } from "@/data/data";
+import { AppleBackground } from "@/src/components/AppleBackground";
+import LanguageSwitcher from "@/src/components/LanguageSwitcher";
+import { useLanguage } from "@/src/contexts/LanguageContext";
+import { DEFAULT_PROFILE, PROFILES } from "@/src/data/data";
 import { signOut } from "firebase/auth";
 import {
   CreditCard,

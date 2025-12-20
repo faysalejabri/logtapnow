@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SOCIAL_LABELS } from "../constants";
+import { SOCIAL_LABELS } from "../../constants";
 import { useLanguage } from "../contexts/LanguageContext";
 import {
   Trash2,

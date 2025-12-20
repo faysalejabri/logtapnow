@@ -1,4 +1,4 @@
-import { SOCIAL_ICONS } from "../constants";
+import { SOCIAL_ICONS } from "../../constants";
 import { getYoutubeEmbedId, downloadVCard } from "../utils/vcardHelpers";
 import { User, MapPin, Download, Globe, Hexagon, Share2 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";

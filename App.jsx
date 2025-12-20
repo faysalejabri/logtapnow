@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import ClientLoginPage from "./pages/ClientLoginPage";
-import AdminLoginPage from "./pages/AdminLoginPage";
-import Editor from "./pages/editor/Editor";
-import ViewCard from "./pages/ViewCard";
-import Dashboard from "./pages/dashboard/Dashboard";
 import "@/index.css";
+import ClientLoginPage from "./src/pages/ClientLoginPage";
+import AdminLoginPage from "./src/pages/AdminLoginPage";
+import Dashboard from "./src/pages/dashboard/Dashboard";
+import Editor from "./src/pages/editor/Editor";
+import ViewCard from "./src/pages/ViewCard";
 
 export const STORAGE_KEY = "vcard_pro_profiles";
 export const AUTH_KEY = "vcard_pro_auth";

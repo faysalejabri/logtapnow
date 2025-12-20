@@ -1,9 +1,9 @@
 import { AUTH_KEY } from "@/App";
-import EditorForm from "@/components/EditorForm";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import PhonePreview from "@/components/PhonePreview";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { session } from "@/data/data";
+import EditorForm from "@/src/components/EditorForm";
+import LanguageSwitcher from "@/src/components/LanguageSwitcher";
+import PhonePreview from "@/src/components/PhonePreview";
+import { useLanguage } from "@/src/contexts/LanguageContext";
+import { session } from "@/src/data/data";
 import { signOut } from "firebase/auth";
 import { ArrowLeft, CreditCard, Eye, LogOut } from "lucide-react";
 import { useState } from "react";
