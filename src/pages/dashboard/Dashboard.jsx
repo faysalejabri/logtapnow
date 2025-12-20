@@ -15,10 +15,12 @@ import {
   Copy,
   RefreshCw,
   Key,
+  Lock,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Dashboard.module.scss";
+import { GlassCard } from "@/src/components/glass-card/GlassCard";
 
 const Dashboard = () => {
   const { t, isRTL } = useLanguage();
@@ -69,8 +71,12 @@ const Dashboard = () => {
   };
 
   const showCredentials = (e, profile) => {
-    e.stopPropagation();
-    setSelectedCredentialProfile(profile);
+    try {
+      e.stopPropagation();
+      setSelectedCredentialProfile(profile);
+    } catch (error) {
+      console.error("❌ Error showing credentials:", error);
+    }
   };
 
   const regenerateProfilePassword = (profileId) => {
