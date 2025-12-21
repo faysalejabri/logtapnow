@@ -191,21 +191,20 @@ const Dashboard = () => {
             </h2>
 
             <div className={styles.viewToggle}>
-              {viewMode === "grid" ? (
-                <button
-                  className={styles.active}
-                  onClick={() => setViewMode("table")}
-                >
-                  Table
-                </button>
-              ) : (
-                <button
-                  className={styles.active}
-                  onClick={() => setViewMode("grid")}
-                >
-                  Grid
-                </button>
-              )}
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={viewMode === "table"}
+                  onChange={(e) =>
+                    setViewMode(e.target.checked ? "table" : "grid")
+                  }
+                />
+                <span className={styles.slider} />
+              </label>
+
+              <span className={styles.label}>
+                {viewMode === "grid" ? "Grid" : "Table"}
+              </span>
             </div>
           </div>
 
