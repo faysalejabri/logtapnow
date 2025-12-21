@@ -101,14 +101,31 @@ const PhonePreview = ({ profile }) => {
           </div>
 
           {/* Save Contact Button */}
-          <button
-            onClick={() => downloadVCard(profile)}
-            className={styles["phone-preview__save-btn"]}
-            style={buttonStyle}
+          <div
+            style={{
+              gap: 12,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
           >
-            <Download size={18} />
-            <span>{t("saveContact")}</span>
-          </button>
+            <button
+              onClick={() => downloadVCard(profile)}
+              className={styles["phone-preview__save-btn"]}
+              style={buttonStyle}
+            >
+              <Download size={18} />
+              <span>{t("saveContact")}</span>
+            </button>
+            <button
+              onClick={() => downloadVCard(profile)}
+              className={styles["phone-preview__save-btn"]}
+              style={buttonStyle}
+            >
+              <Download size={18} />
+              <span>{t("saveContact")}</span>
+            </button>
+          </div>
 
           {/* Bio Section */}
           {profile.bio && (

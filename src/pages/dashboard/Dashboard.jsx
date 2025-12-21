@@ -21,11 +21,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Dashboard.module.scss";
 import { GlassCard } from "@/src/components/glass-card/GlassCard";
+import GlassTable from "@/src/components/glass-table/GlassTable";
 
 const Dashboard = () => {
   const { t, isRTL } = useLanguage();
   const [profiles, setProfiles] = useState(PROFILES);
   const [session, setSession] = useState(null);
+  const [viewMode, setViewMode] = useState("table");
   const [selectedCredentialProfile, setSelectedCredentialProfile] =
     useState(null);
   const navigate = useNavigate();
@@ -177,9 +179,35 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 px-2">
-            {t("clientCards")}
-          </h2>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 px-2">
+              {t("clientCards")}
+            </h2>
+
+            <div className={styles.viewToggle}>
+              {viewMode === "grid" ? (
+                <button
+                  className={styles.active}
+                  onClick={() => setViewMode("table")}
+                >
+                  Table
+                </button>
+              ) : (
+                <button
+                  className={styles.active}
+                  onClick={() => setViewMode("grid")}
+                >
+                  Grid
+                </button>
+              )}
+            </div>
+          </div>
 
           {profiles.length === 0 ? (
             <div className={styles.emptyState}>
@@ -195,6 +223,12 @@ const Dashboard = () => {
                 {t("createBtn")}
               </button>
             </div>
+          ) : viewMode === "table" ? (
+            <GlassTable
+              profiles={profiles}
+              deleteProfile={deleteProfile}
+              showCredentials={showCredentials}
+            />
           ) : (
             <div className={styles.grid2}>
               {profiles.map((profile) => (
