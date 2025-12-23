@@ -1,4 +1,3 @@
-import { AUTH_KEY } from "@/App";
 import EditorForm from "@/src/components/editor-form/EditorForm";
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import PhonePreview from "@/src/components/phone-preview/PhonePreview";
@@ -27,7 +26,7 @@ const Editor = () => {
         console.error("Error signing out from firebase", e);
       }
     }
-    localStorage.removeItem(AUTH_KEY);
+    // localStorage.removeItem(AUTH_KEY);
     // Redirect Admin to /admindash, Client to /
     navigate(role === "admin" ? "/admindash" : "/");
   };

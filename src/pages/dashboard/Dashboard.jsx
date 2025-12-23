@@ -1,4 +1,3 @@
-import { AUTH_KEY, saveProfiles } from "@/App";
 import { AppleBackground } from "@/src/components/apple-background/AppleBackground";
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import { useLanguage } from "@/src/contexts/LanguageContext";
@@ -44,7 +43,7 @@ const Dashboard = () => {
         console.error("Error signing out from firebase", e);
       }
     }
-    localStorage.removeItem(AUTH_KEY);
+    // localStorage.removeItem(AUTH_KEY);
     // Redirect Admin to /admindash, Client to /
     navigate(role === "admin" ? "/admindash" : "/");
   };
@@ -66,9 +65,9 @@ const Dashboard = () => {
     e.stopPropagation();
     if (confirm(t("confirmDelete"))) {
       const updated = profiles.filter((p) => p.id !== id);
-      if (saveProfiles(updated)) {
-        setProfiles(updated);
-      }
+      // if (saveProfiles(updated)) {
+      setProfiles(updated);
+      // }
     }
   };
 
@@ -86,18 +85,18 @@ const Dashboard = () => {
     const updatedProfiles = profiles.map((p) =>
       p.id === profileId ? { ...p, password: newPassword } : p
     );
-    if (saveProfiles(updatedProfiles)) {
-      setProfiles(updatedProfiles);
-      if (
-        selectedCredentialProfile &&
-        selectedCredentialProfile.id === profileId
-      ) {
-        setSelectedCredentialProfile({
-          ...selectedCredentialProfile,
-          password: newPassword,
-        });
-      }
+    // if (saveProfiles(updatedProfiles)) {
+    setProfiles(updatedProfiles);
+    if (
+      selectedCredentialProfile &&
+      selectedCredentialProfile.id === profileId
+    ) {
+      setSelectedCredentialProfile({
+        ...selectedCredentialProfile,
+        password: newPassword,
+      });
     }
+    // }
   };
 
   const copyToClipboard = (text) => {

@@ -1,4 +1,3 @@
-import { AUTH_KEY, AUTHORIZED_ADMINS } from "@/App";
 import { AppleBackground } from "@/src/components/apple-background/AppleBackground";
 import { AppleInput } from "@/src/components/apple-input/AppleInput";
 import { GlassCard } from "@/src/components/glass-card/GlassCard";
@@ -190,8 +189,7 @@ const ClientLoginPage = () => {
 
           <div className="mt-8 text-center space-y-2">
             <p className="text-xs text-gray-400 font-medium">
-              {t("contactAdmin")}{" "}
-              <span className="text-gray-800">{AUTHORIZED_ADMINS[0]}</span>
+              {t("contactAdmin")}
             </p>
           </div>
         </GlassCard>

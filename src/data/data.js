@@ -51,6 +51,25 @@ export const DEFAULT_PROFILE = {
 
 export const PROFILES = [
   {
+    id: "admin-001",
+    password: "1234",
+    createdAt: Date.now(),
+    slug: "faysal",
+    profilePicture: null,
+    firstName: "Faysal",
+    lastName: "El Amrani",
+    profession: "Full Stack Developer",
+    bio: "Full stack developer specialized in React and Node.js based in Casablanca.",
+    email: "faysal@dev.ma",
+    phone: "+212612345678",
+    address: "Casablanca, Morocco",
+    youtubeVideoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    socials: baseSocials("faysal.elamrani"),
+    theme: V_CARD_THEMES[0],
+    active: true,
+    role: "admin",
+  },
+  {
     id: "ma-001",
     password: "1234",
     createdAt: Date.now(),

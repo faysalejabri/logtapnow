@@ -6,37 +6,6 @@ import Editor from "./src/pages/editor/Editor";
 import ViewCard from "./src/pages/ViewCard";
 import "@/index.css";
 
-export const STORAGE_KEY = "vcard_pro_profiles";
-export const AUTH_KEY = "vcard_pro_auth";
-
-export const AUTHORIZED_ADMINS = ["contact@tapnow.ma"];
-
-export const getStoredProfiles = () => {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
-  } catch {
-    return [];
-  }
-};
-export const saveProfiles = (profiles) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
-    return true;
-  } catch (e) {
-    console.error("Storage limit exceeded or error", e);
-    alert(
-      "Storage limit exceeded! The profile picture might be too large. Try a smaller image."
-    );
-    return false;
-  }
-};
-
-export const getSession = () => {
-  const data = localStorage.getItem(AUTH_KEY);
-  return data ? JSON.parse(data) : null;
-};
-
 const App = () => {
   return (
     <BrowserRouter>

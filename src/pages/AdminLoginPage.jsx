@@ -1,4 +1,3 @@
-import { AUTH_KEY, AUTHORIZED_ADMINS } from "@/App";
 import { AppleBackground } from "@/src/components/apple-background/AppleBackground";
 import { AppleInput } from "@/src/components/apple-input/AppleInput";
 import { GlassCard } from "@/src/components/glass-card/GlassCard";
@@ -15,7 +14,6 @@ import { useNavigate } from "react-router";
 
 // --- Admin Login Page ---
 const AdminLoginPage = () => {
-  console.log(":::::: hello");
   const { t, isRTL } = useLanguage();
   // Pre-filled credentials as requested
   const [email, setEmail] = useState("faysale.jabri@gmail.com");
@@ -40,7 +38,11 @@ const AdminLoginPage = () => {
       const user = userCredential.user;
 
       // 2. Authorization Check (Role Enforcement)
-      if (user && user.email && !AUTHORIZED_ADMINS.includes(user.email)) {
+      if (
+        user &&
+        user.email
+        // && !AUTHORIZED_ADMINS.includes(user.email)
+      ) {
         // Not an admin
         await signOut(auth);
         throw new Error("You are not an authorized administrator.");
@@ -48,7 +50,7 @@ const AdminLoginPage = () => {
 
       // 3. Success - Set Local Session
       const session = { role: "admin" };
-      localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+      // localStorage.setItem(AUTH_KEY, JSON.stringify(session));
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
