@@ -1,10 +1,9 @@
-import { PROFILES } from "../data/data";
-
 const AUTH_KEY = "auth_user";
 
-export const login = (id, password) => {
-  const user = PROFILES.find(
-    (p) => p.id === id && p.password === password && p.active
+export const login = (profiles, id, password) => {
+  const user = profiles.find(
+    (p) => p.id === id && p.password === password
+    // && p.active
   );
 
   if (!user) return null;

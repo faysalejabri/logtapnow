@@ -3,19 +3,26 @@ import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitche
 import PhonePreview from "@/src/components/phone-preview/PhonePreview";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { ArrowLeft, CreditCard, LogOut } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import styles from "./Editor.module.scss";
 import { isAdmin, logout } from "@/src/lib/auth";
+import { ProfilesContext } from "@/src/contexts/ProfilesContext";
 
 const Editor = () => {
   const location = useLocation();
   const { t, isRTL } = useLanguage();
   const navigate = useNavigate();
+  const { profiles, setProfiles } = useContext(ProfilesContext);
   const [profile, setProfile] = useState(location.state);
   const [showPreviewMobile, setShowPreviewMobile] = useState(false);
 
-  const handleSave = (updatedProfile) => setProfile(updatedProfile);
+  const handleSave = (updatedProfile) => {
+    setProfile(updatedProfile);
+    setProfiles((prevProfiles) =>
+      prevProfiles.map((p) => (p.id === updatedProfile.id ? updatedProfile : p))
+    );
+  };
 
   const isAnAdmin = isAdmin();
 

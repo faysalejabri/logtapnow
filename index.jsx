@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { LanguageProvider } from "./src/contexts/LanguageContext";
+import { ProfilesProvider } from "./src/contexts/ProfilesContext";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <LanguageProvider>
-      <App />
+      <ProfilesProvider>
+        <App />
+      </ProfilesProvider>
     </LanguageProvider>
   </React.StrictMode>
 );

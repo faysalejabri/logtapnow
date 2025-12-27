@@ -10,12 +10,15 @@ import {
   Mail,
   RefreshCw,
 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { login } from "@/src/lib/auth";
+import { ProfilesContext } from "../contexts/ProfilesContext";
 
 const ClientLoginPage = () => {
   const { t, isRTL } = useLanguage();
+  const { profiles } = useContext(ProfilesContext);
+
   const [id, setId] = useState("ma-001");
   const [password, setPassword] = useState("1234");
   const [error, setError] = useState("");
@@ -30,7 +33,7 @@ const ClientLoginPage = () => {
     setError("");
     setIsLoading(true);
 
-    const user = login(id, password);
+    const user = login(profiles, id, password);
 
     if (!user) {
       setError(t("errorClient"));

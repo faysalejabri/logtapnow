@@ -1,7 +1,7 @@
 import { AppleBackground } from "@/src/components/apple-background/AppleBackground";
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import { useLanguage } from "@/src/contexts/LanguageContext";
-import { DEFAULT_PROFILE, PROFILES } from "@/src/data/data";
+import { DEFAULT_PROFILE } from "@/src/data/data";
 import {
   CreditCard,
   X,
@@ -15,21 +15,24 @@ import {
   Key,
   Lock,
 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Dashboard.module.scss";
 import { GlassCard } from "@/src/components/glass-card/GlassCard";
 import GlassTable from "@/src/components/glass-table/GlassTable";
-import { logout } from "@/src/lib/auth";
+import { isAdmin, logout } from "@/src/lib/auth";
+import { ProfilesContext } from "@/src/contexts/ProfilesContext";
 
 const Dashboard = () => {
   const { t, isRTL } = useLanguage();
-  const [profiles, setProfiles] = useState(PROFILES);
+  const { profiles, setProfiles } = useContext(ProfilesContext);
+
   const [viewMode, setViewMode] = useState("grid");
   const [selectedCredentialProfile, setSelectedCredentialProfile] =
     useState(null);
   const navigate = useNavigate();
 
+  const isAnAdmin = isAdmin();
   const activeProfiles = profiles.filter((p) => p.active);
   const inactiveProfiles = profiles.filter((p) => !p.active);
 
@@ -39,12 +42,11 @@ const Dashboard = () => {
     } catch (e) {
       console.error("Error signing out from firebase", e);
     }
-    // Redirect Admin to /admindash, Client to /
-    navigate(role === "admin" ? "/admindash" : "/");
+    navigate(isAnAdmin ? "/admindash" : "/");
   };
 
   const createNewProfile = () => {
-    const id = Date.now().toString();
+    const id = `ma-00${profiles.length}`;
     const password = Math.random().toString(36).slice(-8);
     const newProfile = {
       ...DEFAULT_PROFILE,
@@ -228,10 +230,9 @@ const Dashboard = () => {
                 <div
                   key={profile.id}
                   className={styles.card}
-                  onClick={() => {
-                    console.log(profile);
-                    navigate(`/edit/${profile.id}`, { state: profile });
-                  }}
+                  onClick={() =>
+                    navigate(`/edit/${profile.id}`, { state: profile })
+                  }
                 >
                   <div
                     className={styles.cardHeader}

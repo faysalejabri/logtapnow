@@ -4,12 +4,14 @@ import { GlassCard } from "@/src/components/glass-card/GlassCard";
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { AlertCircle, Loader2, Shield } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { login } from "@/src/lib/auth";
+import { ProfilesContext } from "../contexts/ProfilesContext";
 
 const AdminLoginPage = () => {
   const { t, isRTL } = useLanguage();
+  const { profiles } = useContext(ProfilesContext);
   const [id, setId] = useState("admin-001");
   const [password, setPassword] = useState("1234");
   const [error, setError] = useState("");
@@ -22,7 +24,7 @@ const AdminLoginPage = () => {
     setError("");
     setIsLoading(true);
 
-    const user = login(id, password);
+    const user = login(profiles, id, password);
 
     if (!user || user.role !== "admin") {
       setError("Invalid admin credentials");
