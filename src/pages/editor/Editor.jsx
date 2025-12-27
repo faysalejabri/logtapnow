@@ -2,33 +2,31 @@ import EditorForm from "@/src/components/editor-form/EditorForm";
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import PhonePreview from "@/src/components/phone-preview/PhonePreview";
 import { useLanguage } from "@/src/contexts/LanguageContext";
-import { session } from "@/src/data/data";
-import { signOut } from "firebase/auth";
-import { ArrowLeft, CreditCard, Eye, LogOut } from "lucide-react";
+import { ArrowLeft, CreditCard, LogOut } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import styles from "./Editor.module.scss";
+import { isAdmin, logout } from "@/src/lib/auth";
 
 const Editor = () => {
   const location = useLocation();
   const { t, isRTL } = useLanguage();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(location.state);
   const [showPreviewMobile, setShowPreviewMobile] = useState(false);
 
   const handleSave = (updatedProfile) => setProfile(updatedProfile);
 
+  const isAnAdmin = isAdmin();
+
   const handleLogout = async () => {
-    const role = session?.role;
-    if (role === "admin") {
-      try {
-        await signOut(auth);
-      } catch (e) {
-        console.error("Error signing out from firebase", e);
-      }
+    try {
+      logout();
+    } catch (e) {
+      console.error("Error signing out from firebase", e);
     }
-    // localStorage.removeItem(AUTH_KEY);
     // Redirect Admin to /admindash, Client to /
-    navigate(role === "admin" ? "/admindash" : "/");
+    navigate(isAnAdmin ? "/admindash" : "/");
   };
 
   return (
@@ -36,7 +34,7 @@ const Editor = () => {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          {session?.role === "admin" ? (
+          {isAnAdmin ? (
             <Link to="/dashboard" className={styles.backButton}>
               <ArrowLeft size={20} className={isRTL ? "rotate-180" : ""} />
             </Link>
@@ -48,16 +46,14 @@ const Editor = () => {
 
           <div>
             <h1 className={styles.title}>
-              {session?.role === "client" ? t("myProfile") : t("editProfile")}
+              {!isAnAdmin ? t("myProfile") : t("editProfile")}
             </h1>
           </div>
         </div>
 
         <div className={styles.headerRight}>
           <LanguageSwitcher />
-          <Link to={`/view/${profile.id}`} className={styles.liveViewLink}>
-            <Eye size={18} /> {t("liveView")}
-          </Link>
+
           <button
             className={styles.liveViewLink}
             onClick={() => setShowPreviewMobile(!showPreviewMobile)}

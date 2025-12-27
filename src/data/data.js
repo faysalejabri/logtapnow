@@ -250,8 +250,3 @@ export const PROFILES = [
     active: true,
   },
 ];
-
-export const session = {
-  role: "admin",
-  id: "ma-001",
-};

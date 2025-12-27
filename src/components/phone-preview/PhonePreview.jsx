@@ -104,6 +104,7 @@ const PhonePreview = ({ profile }) => {
           <div
             style={{
               gap: 12,
+              width: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -115,7 +116,8 @@ const PhonePreview = ({ profile }) => {
               style={buttonStyle}
             >
               <Download size={18} />
-              <span>{t("saveContact")}</span>
+              {/* <span>{t("saveContact")}</span> */}
+              <span>Save</span>
             </button>
             <button
               onClick={() => downloadVCard(profile)}
@@ -123,7 +125,7 @@ const PhonePreview = ({ profile }) => {
               style={buttonStyle}
             >
               <Download size={18} />
-              <span>{t("saveContact")}</span>
+              <span>Send form</span>
             </button>
           </div>
 

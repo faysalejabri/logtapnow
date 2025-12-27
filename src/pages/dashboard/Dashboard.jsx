@@ -2,7 +2,6 @@ import { AppleBackground } from "@/src/components/apple-background/AppleBackgrou
 import LanguageSwitcher from "@/src/components/language-switcher/LanguageSwitcher";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { DEFAULT_PROFILE, PROFILES } from "@/src/data/data";
-import { signOut } from "firebase/auth";
 import {
   CreditCard,
   X,
@@ -21,12 +20,12 @@ import { useNavigate } from "react-router";
 import styles from "./Dashboard.module.scss";
 import { GlassCard } from "@/src/components/glass-card/GlassCard";
 import GlassTable from "@/src/components/glass-table/GlassTable";
+import { logout } from "@/src/lib/auth";
 
 const Dashboard = () => {
   const { t, isRTL } = useLanguage();
   const [profiles, setProfiles] = useState(PROFILES);
-  const [session, setSession] = useState(null);
-  const [viewMode, setViewMode] = useState("table");
+  const [viewMode, setViewMode] = useState("grid");
   const [selectedCredentialProfile, setSelectedCredentialProfile] =
     useState(null);
   const navigate = useNavigate();
@@ -35,15 +34,11 @@ const Dashboard = () => {
   const inactiveProfiles = profiles.filter((p) => !p.active);
 
   const handleLogout = async () => {
-    const role = session?.role;
-    if (role === "admin") {
-      try {
-        await signOut(auth);
-      } catch (e) {
-        console.error("Error signing out from firebase", e);
-      }
+    try {
+      logout();
+    } catch (e) {
+      console.error("Error signing out from firebase", e);
     }
-    // localStorage.removeItem(AUTH_KEY);
     // Redirect Admin to /admindash, Client to /
     navigate(role === "admin" ? "/admindash" : "/");
   };
@@ -233,9 +228,10 @@ const Dashboard = () => {
                 <div
                   key={profile.id}
                   className={styles.card}
-                  onClick={() =>
-                    navigate(`/edit/${profile.id}`, { state: profile })
-                  }
+                  onClick={() => {
+                    console.log(profile);
+                    navigate(`/edit/${profile.id}`, { state: profile });
+                  }}
                 >
                   <div
                     className={styles.cardHeader}
